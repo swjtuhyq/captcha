@@ -33,8 +33,8 @@ project's `composer.json`.
 ```json
 {
     "require": {
-        "laravel/framework": "5.0.*",
-        "swjtuhyq/captcha": "~2.0"
+        "laravel/lumen-framework": "^6.0",
+        "swjtuhyq/captcha": "~1.0"
     },
     "minimum-stability": "dev"
 }
