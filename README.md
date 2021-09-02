@@ -1,12 +1,11 @@
 # Captcha for Lumen 5/6/7
 
-[![Build Status](https://travis-ci.org/mewebstudio/captcha.svg?branch=master)](https://travis-ci.org/mewebstudio/captcha) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mewebstudio/captcha/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mewebstudio/captcha/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/mews/captcha/v/stable.svg)](https://packagist.org/packages/mews/captcha)
-[![Latest Unstable Version](https://poser.pugx.org/mews/captcha/v/unstable.svg)](https://packagist.org/packages/mews/captcha)
-[![License](https://poser.pugx.org/mews/captcha/license.svg)](https://packagist.org/packages/mews/captcha)
-[![Total Downloads](https://poser.pugx.org/mews/captcha/downloads.svg)](https://packagist.org/packages/mews/captcha)
+[![Latest Stable Version](https://poser.pugx.org/swjtuhyq/captcha/v/stable.svg)](https://packagist.org/packages/swjtuhyq/captcha)
+[![Latest Unstable Version](https://poser.pugx.org/swjtuhyq/captcha/v/unstable.svg)](https://packagist.org/packages/swjtuhyq/captcha)
+[![License](https://poser.pugx.org/swjtuhyq/captcha/license.svg)](https://packagist.org/packages/swjtuhyq/captcha)
+[![Total Downloads](https://poser.pugx.org/swjtuhyq/captcha/downloads.svg)](https://packagist.org/packages/swjtuhyq/captcha)
 
-A simple [Laravel 5/6](http://www.laravel.com/) service provider for including the [Captcha for Lumen](https://github.com/mewebstudio/captcha).
+A simple [Laravel 5/6](http://www.laravel.com/) service provider for including the [Captcha for Lumen](https://github.com/swjtuhyq/captcha).
 
 ## Preview
 ![Preview](https://image.ibb.co/kZxMLm/image.png)
@@ -28,7 +27,7 @@ A simple [Laravel 5/6](http://www.laravel.com/) service provider for including t
 ## Installation
 
 The Captcha Service Provider can be installed via [Composer](http://getcomposer.org) by requiring the
-`mews/captcha` package and setting the `minimum-stability` to `dev` (required for Laravel 5) in your
+`swjtuhyq/captcha` package and setting the `minimum-stability` to `dev` (required for Laravel 5) in your
 project's `composer.json`.
 
 ```json
@@ -50,7 +49,7 @@ composer require swjtuhyq/captcha
 
 Update your packages with ```composer update``` or install with ```composer install```.
 
-In Windows, you'll need to include the GD2 DLL `php_gd2.dll` in php.ini. And you also need include `php_fileinfo.dll` and `php_mbstring.dll` to fit the requirements of `mews/captcha`'s dependencies.
+In Windows, you'll need to include the GD2 DLL `php_gd2.dll` in php.ini. And you also need include `php_fileinfo.dll` and `php_mbstring.dll` to fit the requirements of `swjtuhyq/captcha`'s dependencies.
 
 
 
@@ -186,7 +185,7 @@ Based on [Captcha for Laravel 5/6/7/8](https://github.com/mewebstudio/captcha)
 ## Links
 * [Intervention Image](https://github.com/Intervention/image)
 * [L5 Captcha on Github](https://github.com/mewebstudio/captcha)
-* [L5 Captcha on Packagist](https://packagist.org/packages/mews/captcha)
+* [L5 Captcha on Packagist](https://packagist.org/packages/swjtuhyq/captcha)
 * [For L4 on Github](https://github.com/mewebstudio/captcha/tree/master-l4)
 * [License](http://www.opensource.org/licenses/mit-license.php)
 * [Laravel website](http://laravel.com)
