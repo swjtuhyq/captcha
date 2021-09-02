@@ -1,0 +1,57 @@
+{
+	"name": "swjtuhyq/captcha",
+	"type": "package",
+	"description": "Lumen 5 & 6 Captcha Package",
+	"keywords": ["Lumen6 Captcha", "Captcha"],
+	"homepage": "https://github.com/swjtuhyq/captcha",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Huang Yuqiang",
+			"email": "swjtuhyq@foxmail.com",
+			"homepage": "https://github.com/swjtuhyq",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^7.2|^8.0",
+		"ext-gd": "*",
+		"illuminate/config": "~5|^6|^7|^8",
+		"illuminate/filesystem": "~5|^6|^7|^8",
+		"illuminate/support": "~5|^6|^7|^8",
+		"illuminate/hashing": "~5|^6|^7|^8",
+		"illuminate/session": "~5|^6|^7|^8",
+		"intervention/image": "~2.5"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^8.5",
+		"mockery/mockery": "^1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Swjtuhyq\\Captcha\\": "src/"
+		},
+		"files": [
+			"src/helpers.php"
+		]
+	},
+	"autoload-dev": {
+		"classmap": [
+			"tests"
+		],
+		"psr-4": {
+			"Mews\\Test\\": "tests/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Swjtuhyq\\Captcha\\CaptchaServiceProvider"
+			],
+			"aliases": {
+				"Captcha": "Swjtuhyq\\Captcha\\Facades\\Captcha"
+			}
+		}
+	}
+}
