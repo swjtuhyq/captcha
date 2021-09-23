@@ -30,25 +30,10 @@ class CaptchaServiceProvider extends ServiceProvider
             $router = $this->app->router;
             $router->get('captcha/api[/{config:.+}]', 'Swjtuhyq\Captcha\CaptchaController@getCaptchaApi');
             $router->get('captcha[/{config:.+}]', 'Swjtuhyq\Captcha\CaptchaController@getCaptcha');
-        } else {
-            /* @var Router $router */
-            $router = $this->app['router'];
-            if ((double)$this->app->version() >= 5.2) {
-                $router->get('captcha/api/{config?}', '\Swjtuhyq\Captcha\CaptchaController@getCaptchaApi')->middleware('web');
-                $router->get('captcha/{config?}', '\Swjtuhyq\Captcha\CaptchaController@getCaptcha')->middleware('web');
-            } else {
-                $router->get('captcha/api/{config?}', '\Swjtuhyq\Captcha\CaptchaController@getCaptchaApi');
-                $router->get('captcha/{config?}', '\Swjtuhyq\Captcha\CaptchaController@getCaptcha');
-            }
         }
 
         /* @var Factory $validator */
         $validator = $this->app['validator'];
-
-        // Validator extensions
-        $validator->extend('captcha', function ($attribute, $value, $parameters) {
-            return captcha_check($value);
-        });
 
         // Validator extensions
         $validator->extend('captcha_api', function ($attribute, $value, $parameters) {
@@ -75,7 +60,6 @@ class CaptchaServiceProvider extends ServiceProvider
                 $app['Illuminate\Filesystem\Filesystem'],
                 $app['Illuminate\Contracts\Config\Repository'],
                 $app['Intervention\Image\ImageManager'],
-                $app['Illuminate\Session\SessionManager'],
                 $app['Illuminate\Hashing\BcryptHasher'],
                 $app['Illuminate\Support\Str']
             );

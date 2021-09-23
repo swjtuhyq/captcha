@@ -50,11 +50,6 @@ class Captcha
     protected $imageManager;
 
     /**
-     * @var Session
-     */
-    protected $session;
-
-    /**
      * @var Hasher
      */
     protected $hasher;
@@ -195,7 +190,6 @@ class Captcha
      * @param Filesystem $files
      * @param Repository $config
      * @param ImageManager $imageManager
-     * @param Session $session
      * @param Hasher $hasher
      * @param Str $str
      * @throws Exception
@@ -205,14 +199,12 @@ class Captcha
         Filesystem $files,
         Repository $config,
         ImageManager $imageManager,
-        Session $session,
         Hasher $hasher,
         Str $str
     ) {
         $this->files = $files;
         $this->config = $config;
         $this->imageManager = $imageManager;
-        $this->session = $session;
         $this->hasher = $hasher;
         $this->str = $str;
         $this->characters = config('captcha.characters', ['1', '2', '3', '4', '6', '7', '8', '9']);
@@ -343,12 +335,6 @@ class Captcha
         $hash = $this->hasher->make($key);
         if($this->encrypt) $hash = Crypt::encrypt($hash);
 
-        $this->session->put('captcha', [
-            'sensitive' => $this->sensitive,
-            'key' => $hash,
-            'encrypt' => $this->encrypt
-        ]);
-
         return [
             'value' => $bag,
             'sensitive' => $this->sensitive,
@@ -452,36 +438,6 @@ class Captcha
         }
 
         return $this->image;
-    }
-
-    /**
-     * Captcha check
-     *
-     * @param string $value
-     * @return bool
-     */
-    public function check(string $value): bool
-    {
-        if (!$this->session->has('captcha')) {
-            return false;
-        }
-
-        $key = $this->session->get('captcha.key');
-        $sensitive = $this->session->get('captcha.sensitive');
-        $encrypt = $this->session->get('captcha.encrypt');
-
-        if (!$sensitive) {
-            $value = $this->str->lower($value);
-        }
-
-        if($encrypt) $key = Crypt::decrypt($key);
-        $check = $this->hasher->check($value, $key);
-        // if verify pass,remove session
-        if ($check) {
-            $this->session->remove('captcha');
-        }
-
-        return $check;
     }
 
     /**
