@@ -24,8 +24,7 @@ class CaptchaController extends Controller
         if (ob_get_contents()) {
             ob_clean();
         }
-
-        return $captcha->create($config);
+        return response($captcha->create($config), 200, ['Content-Type' => 'image/png']);
     }
 
     /**

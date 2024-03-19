@@ -18,12 +18,10 @@ use Exception;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Hashing\BcryptHasher as Hasher;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\File;
 use Illuminate\Support\Str;
-use Intervention\Image\Gd\Font;
+use Intervention\Image\Geometry\Factories\LineFactory;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
-use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
@@ -47,7 +45,7 @@ class Captcha
     /**
      * @var ImageManager
      */
-    protected $imageManager;
+    protected ImageManager $imageManager;
 
     /**
      * @var Hasher
@@ -58,11 +56,6 @@ class Captcha
      * @var Str
      */
     protected $str;
-
-    /**
-     * @var ImageManager->canvas
-     */
-    protected $canvas;
 
     /**
      * @var Image
@@ -198,13 +191,13 @@ class Captcha
     public function __construct(
         Filesystem $files,
         Repository $config,
-        ImageManager $imageManager,
+//        ImageManager $imageManager,
         Hasher $hasher,
         Str $str
     ) {
         $this->files = $files;
         $this->config = $config;
-        $this->imageManager = $imageManager;
+        $this->imageManager = ImageManager::gd();
         $this->hasher = $hasher;
         $this->str = $str;
         $this->characters = config('captcha.characters', ['1', '2', '3', '4', '6', '7', '8', '9']);
@@ -251,20 +244,10 @@ class Captcha
         $generator = $this->generate();
         $this->text = $generator['value'];
 
-        $this->canvas = $this->imageManager->canvas(
-            $this->width,
-            $this->height,
-            $this->bgColor
-        );
-
-        if ($this->bgImage) {
-            $this->image = $this->imageManager->make($this->background())->resize(
-                $this->width,
-                $this->height
-            );
-            $this->canvas->insert($this->image);
-        } else {
-            $this->image = $this->canvas;
+        if($this->bgImage) {
+            $this->image = $this->imageManager->read($this->background())->resize($this->width,$this->height);
+        }else{
+            $this->image = $this->imageManager->create($this->width, $this->height)->fill($this->bgColor);
         }
 
         if ($this->contrast != 0) {
@@ -292,8 +275,8 @@ class Captcha
         return $api ? [
             'sensitive' => $generator['sensitive'],
             'key' => $generator['key'],
-            'img' => $this->image->encode('data-url')->encoded
-        ] : $this->image->response('png', $this->quality);
+            'img' => $this->image->toPng()->toDataUri()
+        ] : $this->image->toPng();
     }
 
     /**
@@ -425,16 +408,17 @@ class Captcha
     protected function lines()
     {
         for ($i = 0; $i <= $this->lines; $i++) {
-            $this->image->line(
-                rand(0, $this->image->width()) + $i * rand(0, $this->image->height()),
-                rand(0, $this->image->height()),
-                rand(0, $this->image->width()),
-                rand(0, $this->image->height()),
-                function ($draw) {
-                    /* @var Font $draw */
-                    $draw->color($this->fontColor());
-                }
-            );
+            $this->image->drawLine(function (LineFactory $line) use ($i) {
+                $line->from(
+                    rand(0, $this->image->width()) + $i * rand(0, $this->image->height()),
+                    rand(0, $this->image->height())
+                )
+                ->to(
+                    rand(0, $this->image->width()),
+                    rand(0, $this->image->height())
+                )
+                ->color($this->fontColor());
+            });
         }
 
         return $this->image;

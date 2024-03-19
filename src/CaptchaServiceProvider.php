@@ -59,7 +59,6 @@ class CaptchaServiceProvider extends ServiceProvider
             return new Captcha(
                 $app['Illuminate\Filesystem\Filesystem'],
                 $app['Illuminate\Contracts\Config\Repository'],
-                $app['Intervention\Image\ImageManager'],
                 $app['Illuminate\Hashing\BcryptHasher'],
                 $app['Illuminate\Support\Str']
             );
