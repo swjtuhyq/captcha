@@ -1,28 +1,11 @@
-# Captcha for Lumen 5/6/7
+# Captcha for Lumen 9/10
 
 [![Latest Stable Version](https://poser.pugx.org/swjtuhyq/captcha/v/stable.svg)](https://packagist.org/packages/swjtuhyq/captcha)
 [![Latest Unstable Version](https://poser.pugx.org/swjtuhyq/captcha/v/unstable.svg)](https://packagist.org/packages/swjtuhyq/captcha)
 [![License](https://poser.pugx.org/swjtuhyq/captcha/license.svg)](https://packagist.org/packages/swjtuhyq/captcha)
 [![Total Downloads](https://poser.pugx.org/swjtuhyq/captcha/downloads.svg)](https://packagist.org/packages/swjtuhyq/captcha)
 
-A simple [Laravel 5/6](http://www.laravel.com/) service provider for including the [Captcha for Lumen](https://github.com/swjtuhyq/captcha).
-
-## Preview
-![Preview](https://image.ibb.co/kZxMLm/image.png)
-
-- [Captcha for Laravel 5/6/7](#captcha-for-laravel-5-6-7)
-  * [Preview](#preview)
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Configuration](#configuration)
-  * [Example Usage](#example-usage)
-    + [Session Mode:](#session-mode-)
-    + [Stateless Mode:](#stateless-mode-)
-- [Return Image](#return-image)
-- [Return URL](#return-url)
-- [Return HTML](#return-html)
-- [To use different configurations](#to-use-different-configurations)
-  * [Links](#links)
+A simple [Lumen 9/10](http://www.laravel.com/) service provider for including the [Captcha for Lumen](https://github.com/swjtuhyq/captcha).
   
 ## Installation
 
@@ -33,8 +16,8 @@ project's `composer.json`.
 ```json
 {
     "require": {
-        "laravel/lumen-framework": "^6.0",
-        "swjtuhyq/captcha": "~1.0"
+        "laravel/lumen-framework": "^10.0",
+        "swjtuhyq/captcha": "~2.0"
     },
     "minimum-stability": "dev"
 }
